@@ -1,31 +1,30 @@
 import React from "react";
 import "antd/dist/antd.css";
 import { Form, Input, Button } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { sendTask } from "./../redux/task-reduser";
 
 const layout = {
-    labelCol: {
-      span: 8,
-    },
-    wrapperCol: {
-      span: 16,
-    },
-  };
+  labelCol: {
+    span: 8,
+  },
+  wrapperCol: {
+    span: 16,
+  },
+};
 
-export const Formik = () => {   
+export const Formik = () => {
+  const dispatch = useDispatch();
   const validateMessages = {
     required: "${label} is required!",
     types: {
       email: "${label} is not a valid email!",
       number: "${label} is not a valid number!",
     },
-    number: {
-      range: "${label} must be between ${min} and ${max}",
-    },
   };
-  /* eslint-enable no-template-curly-in-string */
-
-  const onFinish = (values) => {
-    console.log(values);
+  const developer = useSelector((state) => state.task.developer);
+  const onFinish = (values) => {  
+    dispatch( sendTask(values.user.email, values.user.name, values.user.text, developer));
   };
   return (
     <Form
@@ -36,7 +35,7 @@ export const Formik = () => {
     >
       <Form.Item
         name={["user", "name"]}
-        label="Name"
+        label="name"
         rules={[
           {
             required: true,
@@ -47,16 +46,25 @@ export const Formik = () => {
       </Form.Item>
       <Form.Item
         name={["user", "email"]}
-        label="Email"
+        label="email"
         rules={[
           {
+            required: true,
             type: "email",
           },
         ]}
       >
         <Input />
       </Form.Item>
-      <Form.Item name={["user", "task"]} label="Task">
+      <Form.Item
+        name={["user", "text"]}
+        label="Text"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
         <Input.TextArea />
       </Form.Item>
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>

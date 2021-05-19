@@ -1,73 +1,70 @@
 import React, { useEffect } from "react";
-import { Table, Typography, Image } from "antd";
-import { pokemons } from "../data";
+import { Table, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getTasks } from "../redux/task-reduser";
+import Text from "antd/lib/typography/Text";
+import { NavLink } from "react-router-dom";
 
 const columns = [
   {
     title: "User name",
     dataIndex: "username",
-    key: "username",    
+    key: "username",
+    editable: true,
+    sorter: (a, b) => a.username.length - b.username.length,
   },
   {
     title: "E-mail",
     dataIndex: "email",
     key: "email",
-    sorter: (a, b) => a.height - b.height,
+    sorter: (a, b) => a.email.length - b.email.length,
   },
   {
     title: "Task",
     dataIndex: "text",
     key: "text",
+    sorter: (a, b) => a.text.length - b.text.length,
+  },
+  {
+    title: "id",
+    dataIndex: "id",
+    key: "id",
+    render: (id) => (
+      <Button type="primary">
+        <NavLink to={`/edit/${id}`}>Edit</NavLink>
+      </Button>
+    ),
   },
   {
     title: "Status",
     dataIndex: "status",
     key: "status",
+    render: (status) =>
+      status === 0 ? (
+        <Text type="danger">task not completed</Text>
+      ) : status === 1 ? (
+        <Text type="danger">task not completed, edited by admin</Text>
+      ) : status === 10 ? (
+        <Text type="success">task completed</Text>
+      ) : status === 11 ? (
+        <Text type="success">task edited by admin and completed</Text>
+      ) : (
+        ""
+      ),
   },
-  // {
-  //   title: "Image",
-  //   dataIndex: "img",
-  //   key: "img",
-  //   render: (image) => <Image src={image} alt={image} width={100}/>
-  // },
-  // {
-  //   title: "Candy",
-  //   dataIndex: "candy",
-  //   key: "candy",
-  //   filters: [
-  //     {
-  //       text: "Bulbasaur Candy",
-  //       value: "Bulbasaur Candy",
-  //     },
-  //     {
-  //       text: "Charmander Candy",
-  //       value: "Charmander Candy",
-  //     },
-  //     {
-  //       text: "Squirtle Candy",
-  //       value: "Squirtle Candy",
-  //     },
-  //   ],
-  //   onFilter: (value, item)=> item.candy.includes(value)
-  // },
 ];
-// const dataSource = pokemons.map(item => ({...item, key: item.id}))
 
 export const _Table = ({ rows = 3 }) => {
   const dataSource = useSelector((state) => state.task.tasks);
   const totatTask = useSelector((state) => state.task.total_task_count);
   const currentPage = useSelector((state) => state.task.currentPage);
-  const dispatch = useDispatch(); 
-  useEffect(()=> {
-    dispatch(getTasks("admin", 1));
-  }, []) 
-  // dispatch(getTasks("admin", 1));
-  const onChange = page => {
-    console.log(page);
-    dispatch(getTasks("admin", page));
-    
+  const developer = useSelector((state) => state.task.developer);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getTasks(developer, 1));
+  }, [developer]);
+  const onChange = (page) => {
+    dispatch(getTasks(developer, page));
   };
   return (
     <Table

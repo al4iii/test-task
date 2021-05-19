@@ -1,26 +1,26 @@
-import { Col, Row, Slider, Typography } from "antd";
 import React from "react";
 import { Header } from "./components/Header";
 import { _Table } from "./components/Table";
-import { Formik } from "./components/Form";
-import { Provider, useDispatch } from "react-redux";
+import { Provider } from "react-redux";
 import store from "./redux/redux-store";
-import { getTasks } from "./redux/task-reduser";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import Content from "./components/content";
+import { Login } from "./components/Login";
+import { Edit } from "./components/Edit";
 
-const App = () => {  
+const App = () => {
   return (
-    <Provider store={store}>
-      <Header />
-      <Col xs={24} md={{ span: 8, offset: 4 }}>
-        <Formik />
-      </Col>
-      <Row>
-        <Col xs={24} md={{ span: 12, offset: 6 }}>
-          <Typography.Title level={4}></Typography.Title>
-          <_Table />
-        </Col>
-      </Row>
-    </Provider>
+    <BrowserRouter>
+      <Provider store={store}>
+        <Header />
+        <Switch>
+          <Route exact path="/" render={() => <Redirect to={"/content"} />} />
+          <Route path="/content" render={() => <Content />} />
+          <Route exact path="/login" render={() => <Login />} />
+          <Route path="/edit/:id?" render={() => <Edit />} />
+        </Switch>
+      </Provider>
+    </BrowserRouter>
   );
 };
 

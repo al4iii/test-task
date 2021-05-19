@@ -1,12 +1,12 @@
 import React from "react";
 import { Header } from "./components/Header";
-import { _Table } from "./components/Table";
 import { Provider } from "react-redux";
 import store from "./redux/redux-store";
-import { BrowserRouter, HashRouter, Redirect, Route, Switch } from "react-router-dom";
-import Content from "./components/content";
+import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
+import Content from "./components/Content";
 import { Login } from "./components/Login";
 import { Edit } from "./components/Edit";
+import { Footer } from "antd/lib/layout/layout";
 
 const App = () => {
   return (
@@ -19,6 +19,7 @@ const App = () => {
           <Route exact path="/login" render={() => <Login />} />
           <Route path="/edit/:id?" render={() => <Edit />} />
         </Switch>
+        <Footer>Creacet by <a href="https://github.com/al4iii">al4ii</a></Footer>
       </Provider>
     </HashRouter>
   );

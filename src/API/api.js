@@ -13,20 +13,17 @@ export const API = {
       .get(`?developer=${developer}&page=${page}`)
       .then((response) => response);
   },
-  sendTask: (bodyFormData, developer) => {
-    debugger;
+  sendTask: (bodyFormData, developer) => {  
     return instanse
       .post(`/create?developer=${developer}`, bodyFormData)
       .then((response) => response);
   },
-  login: (formData, username) => {
-    debugger;
+  login: (formData, username) => {  
     return instanse
       .post(`/login?developer=${username}`, formData)
       .then((response) => response);
   },
   editTask: (formData, id, developer) => {
-    debugger;
     return instanse
       .post(`edit/${id}?developer=${developer}`, formData)
       .then((response) => response);

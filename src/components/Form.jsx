@@ -22,12 +22,15 @@ export const Formik = () => {
       number: "${label} is not a valid number!",
     },
   };
+  const formRef = React.createRef()
   const developer = useSelector((state) => state.task.developer);
   const onFinish = (values) => {  
     dispatch( sendTask(values.user.email, values.user.name, values.user.text, developer));
+    formRef.current.resetFields()
   };
   return (
     <Form
+      ref={formRef}
       {...layout}
       name="message"
       onFinish={onFinish}

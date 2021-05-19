@@ -1,8 +1,8 @@
 import React from "react";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/task-reduser";
-import Content from "./content";
+import Content from "./Content";
 
 const layout = {
   labelCol: { span: 8 },

@@ -9,9 +9,9 @@ export const Header = () => {
   const developer = useSelector((state) => state.task.developer);
   return (
     <Row>
-      <Col span={6} offset={6} className="gutter-row" style={{ marginTop: 10 }}>
-        <Title level={2}>
-          Test task by <a href="https://github.com/al4iii">al4ii</a>{" "}
+      <Col span={6} offset={6} className="gutter-row">
+        <Title level={2} style={{ marginTop: 15 }}>
+          Test task 
         </Title>
       </Col>
       <Col span={6} offset={6} className="gutter-row">
@@ -20,7 +20,9 @@ export const Header = () => {
             <NavLink to={"/login"}>Login</NavLink>
           </Button>
         ) : (
-          <Text keyboard> {developer}</Text>
+          <Row style={{ marginTop: 20 }}>
+            <Text keyboard> {developer}</Text>
+          </Row>
         )}
       </Col>
       <Divider />

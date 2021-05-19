@@ -1,20 +1,9 @@
 import React, { useState } from "react";
 import "antd/dist/antd.css";
-import {
-  Form,
-  Input,
-  Button,
-  Col,
-  Typography,
-  Select,
-  Cascader,
-  Radio,
-  Space,
-} from "antd";
+import { Form, Input, Button, Col, Typography, Space, Radio } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { editTask } from "../redux/task-reduser";
 import { Redirect, useHistory } from "react-router";
-import { Option } from "antd/lib/mentions";
 const { Title } = Typography;
 
 const layout = {
@@ -43,8 +32,8 @@ export const Edit = React.memo(() => {
   if (isEdit) {
     return <Redirect to={"/content"} />;
   }
-  const onChange = (values) => {   
-    setStatus(values.target.value);    
+  const onChange = (value) => {
+    setStatus(value.target.value);
   };
   return (
     <>
@@ -63,26 +52,21 @@ export const Edit = React.memo(() => {
           onFinish={onFinish}
           validateMessages={validateMessages}
         >
-          <Form.Item
-            name={["user", "text"]}
-            label="Text"
-            
-          >
+          <Form.Item name={["user", "text"]} label="Text">
             <Input.TextArea placeholder={message} />
-            <Input.Group>
-              <Radio.Group onChange={onChange}>
-                <Space direction="vertical">
-                  <Radio value={0}>Task not completed</Radio>
-                  <Radio value={1}>Task not completed, edited by admin</Radio>
-                  <Radio value={10}>Task completed</Radio>
-                  <Radio value={11}>Task edited by admin and completed </Radio>
-                </Space>
-              </Radio.Group>
-            </Input.Group>
           </Form.Item>
-
+          <Radio.Group onChange={onChange}>
+            <Space direction="vertical">
+              <Col span={8} offset={15} className="gutter-row">
+                <Radio value={0}>Task not completed</Radio>
+                <Radio value={1}>Task not completed, edited by admin</Radio>
+                <Radio value={10}>Task completed</Radio>
+                <Radio value={11}>Task edited by admin and completed</Radio>
+              </Col>
+            </Space>
+          </Radio.Group>
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" style={{ marginTop: 20 }}>
               Submit
             </Button>
           </Form.Item>

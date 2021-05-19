@@ -19,7 +19,7 @@ const App = () => {
           <Route exact path="/login" render={() => <Login />} />
           <Route path="/edit/:id?" render={() => <Edit />} />
         </Switch>
-        <Footer>Created by<a href="https://github.com/al4iii">al4ii</a></Footer>
+        <Footer>Created by <a href="https://github.com/al4iii">al4ii</a></Footer>
       </Provider>
     </HashRouter>
   );

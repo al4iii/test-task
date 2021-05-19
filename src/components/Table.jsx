@@ -4,8 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTasks } from "../redux/task-reduser";
 import Text from "antd/lib/typography/Text";
 import { NavLink } from "react-router-dom";
+import { CheckCircleOutlined, CloseCircleOutlined, IssuesCloseOutlined, CheckOutlined} from "@ant-design/icons";
 
 const columns = [
+  {
+    title: "id",
+    dataIndex: "id",
+    key: "id",
+    sorter: (a, b) => a.id - b.id,
+  },
   {
     title: "User name",
     dataIndex: "username",
@@ -24,20 +31,28 @@ const columns = [
     dataIndex: "text",
     key: "text",
     sorter: (a, b) => a.text.length - b.text.length,
-  },  
+  },
   {
     title: "Status",
     dataIndex: "status",
     key: "status",
     render: (status) =>
       status === 0 ? (
-        <Text type="danger">task not completed</Text>
+        <Text type="danger">
+          task not completed <CloseCircleOutlined />
+        </Text>
       ) : status === 1 ? (
-        <Text type="danger">task not completed, edited by admin</Text>
+        <Text type="danger">
+          task not completed, edited by admin <IssuesCloseOutlined />
+        </Text>
       ) : status === 10 ? (
-        <Text type="success">task completed</Text>
+        <Text type="success">
+          task completed <CheckCircleOutlined />
+        </Text>
       ) : status === 11 ? (
-        <Text type="success">task edited by admin and completed</Text>
+        <Text type="success">
+          task edited by admin and completed <CheckOutlined />
+        </Text>
       ) : (
         ""
       ),

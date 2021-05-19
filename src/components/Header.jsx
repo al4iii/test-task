@@ -11,7 +11,7 @@ export const Header = React.memo(() => {
     <Row>
       <Col span={6} offset={6} className="gutter-row">
         <Title level={2} style={{ marginTop: 15 }}>
-          Test task 
+          To Do List
         </Title>
       </Col>
       <Col span={6} offset={6} className="gutter-row">

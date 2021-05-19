@@ -24,17 +24,7 @@ const columns = [
     dataIndex: "text",
     key: "text",
     sorter: (a, b) => a.text.length - b.text.length,
-  },
-  {
-    title: "id",
-    dataIndex: "id",
-    key: "id",
-    render: (id) => (
-      <Button type="primary">
-        <NavLink to={`/edit/${id}`}>Edit</NavLink>
-      </Button>
-    ),
-  },
+  },  
   {
     title: "Status",
     dataIndex: "status",
@@ -51,6 +41,16 @@ const columns = [
       ) : (
         ""
       ),
+  },
+  {
+    title: " ",
+    dataIndex: "id",
+    key: "id",
+    render: (id) => (
+      <Button type="primary">
+        <NavLink to={`/edit/${id}`}>Edit</NavLink>
+      </Button>
+    ),
   },
 ];
 

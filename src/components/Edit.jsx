@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import "antd/dist/antd.css";
-import { Form, Input, Button, Col, Typography } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Col,
+  Typography,
+  Select,
+  Cascader,
+  Radio,
+  Space,
+} from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { editTask } from "../redux/task-reduser";
 import { Redirect, useHistory } from "react-router";
+import { Option } from "antd/lib/mentions";
 const { Title } = Typography;
 
 const layout = {
@@ -23,14 +34,18 @@ export const Edit = React.memo(() => {
   const developer = useSelector((state) => state.task.developer);
   const token = useSelector((state) => state.task.token);
   const dispatch = useDispatch();
+  const [status, setStatus] = useState(0);
   const validateMessages = {
     required: "${label} is required!",
   };
   const onFinish = (values) =>
-    dispatch(editTask(values.user.text, taskId, developer, token));
+    dispatch(editTask(values.user.text, taskId, developer, token, status));
   if (isEdit) {
     return <Redirect to={"/content"} />;
   }
+  const onChange = (values) => {   
+    setStatus(values.target.value);    
+  };
   return (
     <>
       {developer === "al4i" ? (
@@ -51,14 +66,21 @@ export const Edit = React.memo(() => {
           <Form.Item
             name={["user", "text"]}
             label="Text"
-            rules={[
-              {
-                required: true,
-              },
-            ]}
+            
           >
             <Input.TextArea placeholder={message} />
+            <Input.Group>
+              <Radio.Group onChange={onChange}>
+                <Space direction="vertical">
+                  <Radio value={0}>Task not completed</Radio>
+                  <Radio value={1}>Task not completed, edited by admin</Radio>
+                  <Radio value={10}>Task completed</Radio>
+                  <Radio value={11}>Task edited by admin and completed </Radio>
+                </Space>
+              </Radio.Group>
+            </Input.Group>
           </Form.Item>
+
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
             <Button type="primary" htmlType="submit">
               Submit

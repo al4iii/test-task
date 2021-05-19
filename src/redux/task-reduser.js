@@ -82,10 +82,11 @@ export const login = (username, password) => async (dispatch) => {
     dispatch(getTasks(username, 1));
   }
 };
-export const editTask = (text, id, developer, token) => async (dispatch) => {
+export const editTask = (text, id, developer, token, status) => async (dispatch) => {
   const formData = new FormData();
   formData.set("text", text);
   formData.set("token", token);
+  formData.set("status", status);
   let response = await API.editTask(formData, id, developer);
   if ((response.data.status = "ok")) {
     dispatch(setEdit(true));

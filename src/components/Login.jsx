@@ -12,7 +12,7 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-export const Login = () => {
+export const Login = React.memo(() => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.task.token);
   const onFinish = (values) => {
@@ -60,4 +60,4 @@ export const Login = () => {
       )}
     </>
   );
-};
+});

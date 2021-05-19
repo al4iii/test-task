@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import Text from "antd/lib/typography/Text";
 const { Title } = Typography;
 
-export const Header = () => {
+export const Header = React.memo(() => {
   const developer = useSelector((state) => state.task.developer);
   return (
     <Row>
@@ -28,4 +28,4 @@ export const Header = () => {
       <Divider />
     </Row>
   );
-};
+});

@@ -4,7 +4,7 @@ import { _Table } from "./Table";
 import { Formik } from "./Form";
 import Title from "antd/lib/typography/Title";
 
-const Content = () => {
+const Content = React.memo(() => {
   return (
     <>
       <Col span={6} offset={6}>
@@ -21,6 +21,6 @@ const Content = () => {
       </Row>
     </>
   );
-};
+});
 
 export default Content;

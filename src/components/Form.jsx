@@ -13,7 +13,7 @@ const layout = {
   },
 };
 
-export const Formik = () => {
+export const Formik = React.memo(() => {
   const dispatch = useDispatch();
   const validateMessages = {
     required: "${label} is required!",
@@ -77,4 +77,4 @@ export const Formik = () => {
       </Form.Item>
     </Form>
   );
-};
+});

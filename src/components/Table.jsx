@@ -54,7 +54,7 @@ const columns = [
   },
 ];
 
-export const _Table = ({ rows = 3 }) => {
+export const _Table = React.memo(({ rows = 3 }) => {
   const dataSource = useSelector((state) => state.task.tasks);
   const totatTask = useSelector((state) => state.task.total_task_count);
   const currentPage = useSelector((state) => state.task.currentPage);
@@ -80,4 +80,4 @@ export const _Table = ({ rows = 3 }) => {
       }}
     />
   );
-};
+});

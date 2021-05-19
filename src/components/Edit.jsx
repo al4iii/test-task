@@ -14,7 +14,7 @@ const layout = {
     span: 6,
   },
 };
-export const Edit = () => {
+export const Edit = React.memo(() => {
   const isEdit = useSelector((state) => state.task.isEdit);
   const tasks = useSelector((state) => state.task.tasks);
   const history = useHistory();
@@ -68,4 +68,4 @@ export const Edit = () => {
       )}
     </>
   );
-};
+});

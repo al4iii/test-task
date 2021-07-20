@@ -1,7 +1,6 @@
 import React from 'react';
 
-const New = () => {
-  const a = 1
+const New = () => {  
   return (
     <div>
       
